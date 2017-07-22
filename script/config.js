@@ -41,7 +41,7 @@ var mapElements = mapHolder.append("rect")
 // resize elements
 function resize () { 
     
-    // change margins
+    // change margins all set equal
     var newMargins = document.getElementById("select").value;
     containerMargins = { top: newMargins, right: newMargins, bottom: newMargins, left: newMargins },
     width = containerWidth - containerMargins.left - containerMargins.right,
