@@ -14,12 +14,27 @@
 <div id="controls">
 
     <div class="dimensions">
-       Margins: <select name="" id="select" onchange="resize()">
-        <option>100</option>
-        <option>10</option>
-        <option>25</option>
-    </select>
+      <div class="label">
+          Height: </div>
+    <div class="input">
+        <input type="text" id="height">
+        </div>
     </div>
+    <div class="dimensions">
+      <div class="label">
+          Width: </div>
+    <div class="input">
+        <input type="text" id="width">
+        </div>
+    </div>
+    <div class="dimensions">
+      <div class="label">&nbsp;
+           </div>
+    <div class="input">
+        <button onClick="resize()">Update</button>
+        </div>
+    </div>
+    
 </div>
 
 
@@ -32,7 +47,7 @@
 
 
 <script src="script/config.js"></script>
-<script src="script/map.js"></script>
+
 
 </body>
 </html>

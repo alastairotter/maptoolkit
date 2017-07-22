@@ -1,22 +1,31 @@
 // defaults
-var containerWidth = 700,
-    containerHeight = 500,
-    containerMargins = { top: 100, right: 100, bottom: 100, left: 100 },
+var containerWidth = 400,
+    containerHeight = 300,
+    containerMargins = { top: 15, right: 15, bottom: 15, left: 15 };
+
+var updateDimensions = function () { 
     width = containerWidth - containerMargins.left - containerMargins.right,
     height = containerHeight - containerMargins.top - containerMargins.bottom;
+}
+updateDimensions();
 
 window.addEventListener('load', function() {
     
-    // dimensions of chart container : clientWidth excludes borders, use offsetWidth to include border in calculation
+    // Set svg container width & height
+    d3.select("#chart").style("width", containerWidth + "px").style("height", containerHeight + "px").style("fill","green");
+    svg.attr("width", containerWidth).attr("height", containerHeight);
     
-    containerWidth = document.getElementById("chart").clientWidth; 
+    // set input defaults
+    document.getElementById("width").value = containerWidth;
+    document.getElementById("height").value = containerHeight;
+    
+//    containerWidth = document.getElementById("chart").clientWidth; 
     containerHeight = document.getElementById("chart").clientHeight; 
     width = containerWidth - containerMargins.left - containerMargins.right;
     height = containerHeight - containerMargins.top - containerMargins.bottom; 
       
     
-    // set dimension inputs
-    document.getElementById("select").value = containerMargins.top;
+    
 
 })
 
@@ -41,18 +50,42 @@ var mapElements = mapHolder.append("rect")
 // resize elements
 function resize () { 
     
-    // change margins all set equal
-    var newMargins = document.getElementById("select").value;
-    containerMargins = { top: newMargins, right: newMargins, bottom: newMargins, left: newMargins },
-    width = containerWidth - containerMargins.left - containerMargins.right,
-    height = containerHeight - containerMargins.top - containerMargins.bottom;
+    // get values
+    containerWidth = document.getElementById("width").value;
+    containerHeight = document.getElementById("height").value;
     
-    // change g element
-    mapHolder.transition().duration(500).attr("transform", "translate(" + containerMargins.left + ", " + containerMargins.top + ")").attr("width", width).attr("height", height);
+    updateDimensions();
     
-    // change rect
+    // change chart div dimensions
+    d3.select("#chart").transition().duration(500).style("width", containerWidth + "px").style("height", containerHeight + "px")
+    
+    // change svg dimensions
+    svg.transition().duration(500).attr("width", containerWidth).attr("height", containerHeight);
+    
+    // change mapHolder dimensions // not sure about this
+    mapHolder.transition().duration(500).attr("width", width).attr("height", height);
+    
+    // change placeholder dimensions
     mapElements.transition().duration(500).attr("width", width).attr("height", height);
     
+    
+    
+    
+    
+    
+    
+//    // change margins
+////    var newMargins = document.getElementById("select").value;
+//    containerMargins = { top: newMargins, right: newMargins, bottom: newMargins, left: newMargins },
+//    width = containerWidth - containerMargins.left - containerMargins.right,
+//    height = containerHeight - containerMargins.top - containerMargins.bottom;
+//    
+//    // change g element
+//    mapHolder.transition().duration(500).attr("transform", "translate(" + containerMargins.left + ", " + containerMargins.top + ")").attr("width", width).attr("height", height);
+//    
+//    // change rect
+//    mapElements.transition().duration(500).attr("width", width).attr("height", height);
+//    
 
     
 }
